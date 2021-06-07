@@ -21,8 +21,8 @@ class TransactionFactory extends Factory
         'title' => "string",
         'amount' => "float",
         'type' => "string",
-        'created_at' => "string",
-        'updated_at' => "string",
+        'created_at' => Carbon::class,
+        'updated_at' => Carbon::class,
     ])]
     public function definition(): array
     {
