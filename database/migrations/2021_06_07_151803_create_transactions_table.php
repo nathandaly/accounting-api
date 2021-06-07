@@ -21,6 +21,9 @@ class CreateTransactionsTable extends Migration
             $table->decimal('amount', 12)
                 ->comment('Transaction amount up to two decimal places');
 
+            $table->enum('type', ['income', 'expense'])
+                ->comment('Transaction type for filtering on');
+
             $table->foreignId('author_id')
                 ->comment('References the User ID.')
                 ->constrained('users');

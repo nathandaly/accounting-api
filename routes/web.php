@@ -18,4 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::apiResource('transactions', TransactionController::class);
+Route::apiResource('transactions', TransactionController::class)
+    ->except([
+        'show',
+        'update',
+    ]);
