@@ -38,9 +38,9 @@ test('List all transactions by "income" type', function () {
 });
 
 test('List all transactions by "expense" type', function () {
-    $response = getJson('/api/transactions?type=income');
+    $response = getJson('/api/transactions?type=expense');
     $response->assertOk();
-    assertTrue(collect($response->decodeResponseJson())->first()->pluck('type')->contains('income'));
+    assertTrue(collect($response->decodeResponseJson())->first()->pluck('type')->contains('expense'));
 });
 
 test('List all transactions by amount range', function () {
