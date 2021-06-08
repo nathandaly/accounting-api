@@ -2,46 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaction;
+use Illuminate\Http\JsonResponse;
 use App\Http\Requests\AddTransactionRequest;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class TransactionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
+        return response()->json(Transaction::get());
     }
 
-    public function store(AddTransactionRequest $request)
+    public function store(AddTransactionRequest $request): JsonResponse
     {
-        //
+        return response()->json(['success' => true,]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function destroy(int $id): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return response()->json(['success' => true,]);
     }
 }
