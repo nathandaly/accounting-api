@@ -2,11 +2,13 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Auth;
+
 class AddTransactionRequest extends FeedbackFormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return Auth::user()?->tokenCan('transaction:add');
     }
 
     public function rules(): array
