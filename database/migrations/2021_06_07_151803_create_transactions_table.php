@@ -28,6 +28,8 @@ class CreateTransactionsTable extends Migration
                 ->comment('References the User ID.')
                 ->constrained('users');
 
+            $table->softDeletes();
+
             $table->timestamps();
         });
     }
