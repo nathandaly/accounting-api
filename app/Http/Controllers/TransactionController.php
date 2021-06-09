@@ -18,6 +18,8 @@ class TransactionController extends Controller
 
     public function store(AddTransactionRequest $request): JsonResponse
     {
+        Transaction::create($request->all())->save();
+
         return response()->json(['success' => true,]);
     }
 
