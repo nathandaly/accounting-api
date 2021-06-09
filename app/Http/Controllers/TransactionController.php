@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use Illuminate\Http\JsonResponse;
+use App\Http\Filters\TransactionFilter;
 use App\Http\Requests\AddTransactionRequest;
 
 class TransactionController extends Controller
 {
-    public function index(): JsonResponse
+    public function index(TransactionFilter $filter): JsonResponse
     {
-        return response()->json(Transaction::get());
+        $transactions = Transaction::filter($filter)->get();
+
+        return response()->json($transactions);
     }
 
     public function store(AddTransactionRequest $request): JsonResponse
