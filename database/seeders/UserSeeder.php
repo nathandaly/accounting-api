@@ -23,5 +23,17 @@ class UserSeeder extends Seeder
                     ->count(random_int(0, 24))
                     ->create()
             );
+        User::factory([
+                'email' => 'test@pilon.co.uk'
+            ])
+            ->count(1)
+            ->create()
+            ->each(
+                fn (User $user) => Transaction::factory([
+                    'author_id' => $user->id,
+                ])
+                    ->count(random_int(0, 24))
+                    ->create()
+            );
     }
 }
