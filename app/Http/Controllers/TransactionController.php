@@ -12,10 +12,12 @@ use App\Events\TransactionCreated;
 use App\Events\TransactionDeleted;
 use App\Http\Filters\TransactionFilter;
 use App\Http\Requests\AddTransactionRequest;
+use App\Http\Requests\ListTransactionRequest;
+use App\Http\Requests\DeleteTransactionRequest;
 
 class TransactionController extends Controller
 {
-    public function index(TransactionFilter $filter): JsonResponse
+    public function index(ListTransactionRequest $request, TransactionFilter $filter): JsonResponse
     {
         $transactions = Transaction::filter($filter)->get();
 
@@ -40,18 +42,16 @@ class TransactionController extends Controller
         ], JsonResponse::HTTP_CREATED);
     }
 
-    public function destroy(Transaction $transaction): JsonResponse
+    public function destroy(DeleteTransactionRequest $request, Transaction $transaction): JsonResponse
     {
-        $transactionDeleted = false;
-
-        DB::transaction(function () use ($transaction, &$transactionDeleted) {
-            $transactionDeleted = $transaction->delete();
+        DB::transaction(function () use ($transaction) {
+            $transaction->delete();
         });
 
-        TransactionDeleted::dispatchIf($transactionDeleted, $transaction);
+        TransactionDeleted::dispatchIf(!$transaction->exists, $transaction);
 
         return response()->json([
-            'success' => $transactionDeleted,
+            'success' => !$transaction->exists,
         ]);
     }
 }

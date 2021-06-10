@@ -1,7 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +15,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::middleware('auth:sanctum')->post('/tokens/create', function (Request $request) {
+    $token = Auth::user()?->createToken('APT TOKEN', [
+        'transaction:list',
+        'transaction:add',
+        'transaction:delete'
+    ]);
+
+    return ['token' => $token->plainTextToken];
 });

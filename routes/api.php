@@ -15,12 +15,14 @@ use App\Http\Controllers\TransactionController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('transactions', TransactionController::class, [''])
+Route::middleware('auth:sanctum')
+    ->apiResource('transactions', TransactionController::class, [''])
     ->except([
         'show',
         'update',
     ]);
+
