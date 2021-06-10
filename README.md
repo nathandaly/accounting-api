@@ -9,7 +9,7 @@ This project has been developed with:
  - Form Requests to validate inputs and check token abilities for security.
  - Events and Listeners that handle the emailing and logging of transaction. 
  - Transactional database interaction to prevent data corruption.
- - Minimal or no comments as a design chose as the code should be verbose and statically typed.
+ - Minimal or no comments as a design choice as the code should be verbose and statically typed.
 
 ## Installation & setup
 
