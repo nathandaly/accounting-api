@@ -1,62 +1,81 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Technical task
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Technology
 
-## About Laravel
+This project has been developed with:
+ - Authentication (Fortify and Sanctum).
+ - Some level of testing to demonstrate TDD testing ability.  
+ - Custom abstracted filter for transaction list query strings.
+ - Form Requests to validate inputs and check token abilities for security.
+ - Events and Listeners that handle the emailing and logging of transaction. 
+ - Transactional database interaction to prevent data corruption.
+ - Minimal or no comments as a design chose as the code should be verbose and statically typed.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Installation & setup
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
+**NOTE**
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+This project depends on the host running a MacOS, Linux or WSL2 environment with PHP.
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+#### Clone the repository and change into the project directory
+```
+git clone git@github.com:nathandaly/accounting-api.git
+cd accounting-api
+```
+Copy the example `.env`
+```
+cp .env.example .env
+```
+#### Installing dependencies
+```
+composer install
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
+**NOTE**
 
-## Laravel Sponsors
+If your host system is not running PHP 8 then you will need to add `--ignore-platform-reqs`. to the composer command.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+---
 
-### Premium Partners
+Once the PHP and node dependencies have been resolved you can run the [Sail](https://laravel.com/docs/8.x/sail#introduction) containers.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
+```
+export APP_PORT=8080 && ./vendor/bin/sail up -d
+```
+This command will normally take few minutes and will download and build the required containers.
 
-## Contributing
+### Database migration and seeding
+The project contains migration for the database structure as well as a `DotFive` user and example data which you can seed.
+```
+./vendor/bin/sail artisan migrate
+./vendor/bin/sail artisan db:seed
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### :tada: Up and running :tada:
+That should be all that is necessary for the application to be usable.
+A Postman collection has been provided at the root of the project for test purposes.
+#### Test credentials
+```
+email: test@pilon.co.uk
+password: password
+```
 
-## Code of Conduct
+### Testing
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+All tests have been written using PESTPHP which is compatible with PHPUnit.
+```
+sail artisan test
+```
+or
+```
+sail composer test
+```
 
-## Security Vulnerabilities
+### Todos:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+If I had more time:
+- [ ] Implement additional tests for add and delete.
