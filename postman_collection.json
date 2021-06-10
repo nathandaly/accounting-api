@@ -56,12 +56,7 @@
 									"value": "password",
 									"type": "text"
 								}
-							],
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							]
 						},
 						"url": {
 							"raw": "http://localhost:8080/login",
@@ -191,12 +186,7 @@
 						],
 						"body": {
 							"mode": "formdata",
-							"formdata": [],
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"formdata": []
 						},
 						"url": {
 							"raw": "http://localhost:8080/logout",
