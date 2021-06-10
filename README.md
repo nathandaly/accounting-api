@@ -57,7 +57,7 @@ The project contains migration for the database structure as well as a `DotFive`
 
 ### :tada: Up and running :tada:
 That should be all that is necessary for the application to be usable.
-A Postman collection has been provided at the root of the project for test purposes.
+A [Postman collection](https://github.com/nathandaly/accounting-api/blob/master/postman_collection.json) has been provided at the root of the project for test purposes.
 #### Test credentials
 ```
 email: test@pilon.co.uk
